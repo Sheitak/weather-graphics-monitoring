@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Weather Tekin{% endblock %}
+
+{% block body %}
+    <div>
+        <h2 class="city">Météo de la ville de {{ weatherCity.name }}</h2>
+    </div>
+        <div class="contain-graph">
+            <div>
+                <canvas id="chart-js" height="300px"></canvas>
+            </div>
+            <div>
+                <div id="chart-apex"></div>
+            </div>
+            <div>
+                <div id="chart-fusion"></div>
+            </div>
+        </div>
+{% endblock %}

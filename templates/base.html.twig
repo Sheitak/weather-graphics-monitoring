@@ -2,11 +2,62 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Weather Tekin{% endblock %}</title>
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
     </head>
+
     <body>
         {% block body %}{% endblock %}
+
         {% block javascripts %}{% endblock %}
+        <script>
+            //Passe la variable Twig au format JSON, n'encode pas le HTML pour que Javascript échappe correctement les caractères.
+            let weather = '{{ weatherGlobal }}';
+            let main = document.createElement("div");
+            main.innerHTML = weather;
+            let datas = JSON.parse(main.innerText);
+
+            // Tableau des légendes correspondant aux différentes mesures.
+            const labels = Object.keys(datas[0])
+
+            // Création d'un tableau pour chaque mesures et du tableau "totalValues" qui les contiendra tous.
+            const temp = [];
+            const feelsLike = [];
+            const tempMin = [];
+            const tempMax = [];
+            const pressure = [];
+            const seaLevel = [];
+            const grndLevel = [];
+            const humidity = [];
+            const tempKf = [];
+            const totalValues = [];
+
+            for (let i = 0; i < datas.length; i++) {
+                temp.push(datas[i].temp)
+                feelsLike.push(datas[i].feels_like)
+                tempMin.push(datas[i].temp_min)
+                tempMax.push(datas[i].temp_max)
+                pressure.push(datas[i].pressure)
+                seaLevel.push(datas[i].sea_level)
+                grndLevel.push(datas[i].grnd_level)
+                humidity.push(datas[i].humidity)
+                tempKf.push(datas[i].temp_kf)
+            }
+
+            totalValues.push(temp, feelsLike, tempMin, tempMax, pressure, seaLevel, grndLevel, humidity, tempKf)
+        </script>
+
+        {{ encore_entry_script_tags('app') }}
+
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+        <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+        <script type="text/css" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+        <script type="text/html" src="Chart.js"></script>
+        <script type="text/html" src="chartjs-plugin-colorschemes.js"></script>
     </body>
 </html>

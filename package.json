@@ -1,0 +1,30 @@
+{
+    "devDependencies": {
+        "@symfony/webpack-encore": "^0.28.2",
+        "bootstrap": "^4.4.1",
+        "core-js": "^3.0.0",
+        "eslint": "^6.8.0",
+        "jquery": "^3.4.1",
+        "node-sass": "^4.13.1",
+        "popper.js": "^1.16.1",
+        "regenerator-runtime": "^0.13.2",
+        "sass-loader": "^7.0.1",
+        "webpack": "^4.41.6",
+        "webpack-cli": "^3.3.11",
+        "webpack-notifier": "^1.6.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "dependencies": {
+        "apexcharts": "^3.15.6",
+        "babel-loader": "^8.0.6",
+        "file-loader": "^5.0.2",
+        "fusioncharts": "^3.15.0-sr.1"
+    }
+}

@@ -1,0 +1,34 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+.contain-graph {
+  display: flex;
+  flex-direction: column;
+}
+
+.city {
+  text-align: center;
+}
+
+//APEX.JS
+body {
+  font-family: Roboto, sans-serif;
+}
+
+#chart-apex {
+  max-width: 850px;
+  margin: 35px auto;
+}
+
+//CHART.JS
+#chart-js {
+  max-width: 850px;
+  height: 450px;
+  margin: 35px auto;
+}
+
+//FUSIONCHART.JS
+#chart-fusion {
+  max-width: 850px;
+  height: 650px;
+  margin: 35px auto;
+}
