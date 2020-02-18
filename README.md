@@ -1,4 +1,4 @@
-# TEKIN Weather Monitoring - Starter Kit - Symfony 5.0.*
+# TEKIN Weather Monitoring - Symfony 5.0.*
 
 This starter kit is here to easily start a repository.
 
