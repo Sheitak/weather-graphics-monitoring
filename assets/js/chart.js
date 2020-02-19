@@ -15,6 +15,7 @@ window.chartColors = {
 // Graphique d'affichage des différentes courbes.
 let datasets = [];
 
+
 for (let j = 0; j < labels.length; j++) {
     datasets.push({
         label: labels[j],
@@ -48,8 +49,33 @@ const config = {
     }
 };
 
+let chartJsObj = null;
+
 // Récupération du graphique canvas en html vers l'index.
 window.onload = function() {
     const ctx = document.querySelector('#chart-js').getContext('2d');
-    window.myLine = new Chart(ctx, config);
+    chartJsObj = new Chart(ctx, config);
+
+    setInterval(() => {
+        addData(chartJsObj);
+    }, 5000)
 };
+
+// On boucle sur le graphique "chart", pour passer la fonction "popAndAddRand" au tableau "datasets".
+// On passe à l'objet "chart" la fonction "update" qui permet de le mettre à jours après modifications.
+function addData(chart) {
+    let datasets = [];
+    chart.data.datasets.forEach(uneSerie => {
+        console.log(chart)
+        const res = popAndAddRand(uneSerie.data);
+        uneSerie.data = res //push({data: res});
+    });
+    chart.update();
+}
+
+// On retire le premier élément du tableau dans "firstElement", puis on l'ajoute à la fin du tableau existant.
+function popAndAddRand(tableau) {
+    const firstElement = tableau.shift();
+    tableau.push(firstElement);
+    return tableau;
+}
