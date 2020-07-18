@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2020 
+ *   All rights reserved.
+ */
 
 //Set de couleurs pour Chart.js
 window.chartColors = {
@@ -64,9 +68,7 @@ window.onload = function() {
 // On boucle sur le graphique "chart", pour passer la fonction "popAndAddRand" au tableau "datasets".
 // On passe à l'objet "chart" la fonction "update" qui permet de le mettre à jours après modifications.
 function addData(chart) {
-    let datasets = [];
     chart.data.datasets.forEach(uneSerie => {
-        console.log(chart)
         const res = popAndAddRand(uneSerie.data);
         uneSerie.data = res //push({data: res});
     });

@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncode;
+// use App\Service\RequestService;
 
 class WeatherController extends AbstractController
 {
@@ -39,6 +40,8 @@ class WeatherController extends AbstractController
             array_push($weatherGlobal, $weatherData['main']);
         }
         $weatherGlobal = Json_encode($weatherGlobal);
+        // $weatherGlobal = $requestService->RequestData();
+        dump($weatherGlobal);
 
         return $this->render('weather/index.html.twig', [
             'weatherCity' => $weatherCity,

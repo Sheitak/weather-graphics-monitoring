@@ -1,4 +1,8 @@
 /*
+ *   Copyright (c) 2020 
+ *   All rights reserved.
+ */
+/*
  * Welcome to your app's main JavaScript file!
  *
  * We recommend including the built version of this JavaScript file

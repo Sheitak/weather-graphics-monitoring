@@ -8,7 +8,6 @@ import {ZoomLine} from "fusioncharts/zoomline";
 FusionCharts.addDep(ZoomLine);
 FusionCharts.addDep(FusionTheme);
 
-
 // Graphique d'affichage des différentes courbes.
 let datasets = [];
 
@@ -38,11 +37,46 @@ const dataSource = {
                 "lun.|mar.|mer.|jeu.|ven.|sam.|dim."
         }
     ],
-    dataset: datasets
+    dataset: datasets,
+
+    events: {
+        beforeRender: function (evt, args) {
+            function updateData() {
+                dataSource.dataset.forEach(uneSerie => {
+                    console.log(dataSource.dataset);
+                    const res = popAndAddRand(uneSerie.data);
+                    uneSerie.data = res //push({data: res});
+                });
+                dataSource.updateData();
+                console.log(dataSource.updateData());
+            }
+
+            function popAndAddRand(tableau) {
+                const firstElement = tableau.shift();
+                tableau.push(firstElement);
+                return tableau;
+            }
+
+            FusionCharts.ready(function() {
+                new FusionCharts({
+                    type: "zoomline",
+                    renderAt: "chart-fusion",
+                    width: "100%",
+                    height: "100%",
+                    dataFormat: "json",
+                    dataSource
+                }).render();
+
+                setInterval(() => {
+                    updateData();
+                }, 1000)
+            });
+        }
+    }
 };
 
 FusionCharts.ready(function() {
-    const myChart = new FusionCharts({
+    new FusionCharts({
         type: "zoomline",
         renderAt: "chart-fusion",
         width: "100%",
@@ -50,4 +84,24 @@ FusionCharts.ready(function() {
         dataFormat: "json",
         dataSource
     }).render();
+
+    // setInterval(() => {
+    //     updateData();
+    // }, 1000)
 });
+
+// function updateData() {
+//     dataSource.dataset.forEach(uneSerie => {
+//         console.log(dataSource.dataset);
+//         const res = popAndAddRand(uneSerie.data);
+//         uneSerie.data = res //push({data: res});
+//     });
+//     dataSource.updateData();
+//     console.log(dataSource.updateData());
+// }
+//
+// function popAndAddRand(tableau) {
+//     const firstElement = tableau.shift();
+//     tableau.push(firstElement);
+//     return tableau;
+// }
