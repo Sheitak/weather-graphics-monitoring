@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Weather Tekin{% endblock %}</title>
-
+        <title>{% block title %}Weather Graphics Monitoring{% endblock %}</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -11,10 +10,9 @@
 
     <body>
         {% block body %}{% endblock %}
-
         {% block javascripts %}{% endblock %}
         <script>
-            //Passe la variable Twig au format JSON, n'encode pas le HTML pour que Javascript échappe correctement les caractères.
+            // Passe la variable Twig au format JSON, n'encode pas le HTML pour que Javascript échappe correctement les caractères.
             let weather = '{{ weatherGlobal }}';
             let main = document.createElement("div");
             main.innerHTML = weather;
@@ -46,12 +44,9 @@
                 humidity.push(datas[i].humidity)
                 tempKf.push(datas[i].temp_kf)
             }
-
             totalValues.push(temp, feelsLike, tempMin, tempMax, pressure, seaLevel, grndLevel, humidity, tempKf)
         </script>
-
         {{ encore_entry_script_tags('app') }}
-
         <script src="https://d3js.org/d3.v5.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>

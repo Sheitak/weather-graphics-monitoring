@@ -2,18 +2,26 @@
 
 namespace App\Controller;
 
-use phpDocumentor\Reflection\Types\String_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Serializer\Encoder\JsonEncode;
-// use App\Service\RequestService;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 class WeatherController extends AbstractController
 {
     /**
-     * @Route("/", name="weather", methods={"GET"})
+     * @return Response
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     * @Route("/", name="weather")
      */
     public function index(): Response
     {
@@ -22,7 +30,7 @@ class WeatherController extends AbstractController
         $response = $client->request(
             'GET',
             "https://api.openweathermap.org/data/2.5/forecast?id=" .
-            $_ENV['CITY_TOURS_ID'] .
+            $_ENV['CITY_ID'] .
             "&appid=" .
             $_ENV['API_KEY']
         );
@@ -30,18 +38,15 @@ class WeatherController extends AbstractController
         // Récupération des deux tableaux, intégralités des informations liées au climat et toutes les villes.
         $content = $response->toArray();
         $weatherCity = $content['city'];
-        $weatherDatas = $content['list'];
+        $weatherData = $content['list'];
 
         // Récupération d'un tableau de mesures principales et encode en JSON vers fichier base.
         $weatherGlobal = [];
 
-        foreach ($weatherDatas as $key => $weatherData)
-        {
-            array_push($weatherGlobal, $weatherData['main']);
+        foreach ($weatherData as $data) {
+            $weatherGlobal[] = $data['main'];
         }
         $weatherGlobal = Json_encode($weatherGlobal);
-        // $weatherGlobal = $requestService->RequestData();
-        dump($weatherGlobal);
 
         return $this->render('weather/index.html.twig', [
             'weatherCity' => $weatherCity,

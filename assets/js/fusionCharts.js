@@ -1,19 +1,21 @@
 // Include the core fusioncharts file from core
 import FusionCharts from 'fusioncharts/core';
+
 // Include the fusion theme
 import FusionTheme from 'fusioncharts/themes/es/fusioncharts.theme.fusion';
-import {ZoomLine} from "fusioncharts/zoomline";
+import { ZoomLine } from "fusioncharts/zoomline";
+
 // Add the chart and theme as dependency
 // E.g. FusionCharts.addDep(ChartType)
 FusionCharts.addDep(ZoomLine);
 FusionCharts.addDep(FusionTheme);
 
-// Graphique d'affichage des différentes courbes.
+// Graphique d'affichage des différentes courbes
 let datasets = [];
 
 for (let j = 0; j < labels.length; j++) {
     datasets.push({
-        seriesname: labels[j],
+        seriesName: labels[j],
         data: totalValues[j].join('|'),
     })
 }
@@ -38,25 +40,21 @@ const dataSource = {
         }
     ],
     dataset: datasets,
-
     events: {
         beforeRender: function (evt, args) {
             function updateData() {
-                dataSource.dataset.forEach(uneSerie => {
+                dataSource.dataset.forEach(oneSeries => {
                     console.log(dataSource.dataset);
-                    const res = popAndAddRand(uneSerie.data);
-                    uneSerie.data = res //push({data: res});
+                    oneSeries.data = popAndAddRand(oneSeries.data)
                 });
                 dataSource.updateData();
                 console.log(dataSource.updateData());
             }
-
-            function popAndAddRand(tableau) {
-                const firstElement = tableau.shift();
-                tableau.push(firstElement);
-                return tableau;
+            function popAndAddRand(array) {
+                const firstElement = array.shift();
+                array.push(firstElement);
+                return array;
             }
-
             FusionCharts.ready(function() {
                 new FusionCharts({
                     type: "zoomline",
@@ -66,7 +64,6 @@ const dataSource = {
                     dataFormat: "json",
                     dataSource
                 }).render();
-
                 setInterval(() => {
                     updateData();
                 }, 1000)
@@ -84,24 +81,4 @@ FusionCharts.ready(function() {
         dataFormat: "json",
         dataSource
     }).render();
-
-    // setInterval(() => {
-    //     updateData();
-    // }, 1000)
 });
-
-// function updateData() {
-//     dataSource.dataset.forEach(uneSerie => {
-//         console.log(dataSource.dataset);
-//         const res = popAndAddRand(uneSerie.data);
-//         uneSerie.data = res //push({data: res});
-//     });
-//     dataSource.updateData();
-//     console.log(dataSource.updateData());
-// }
-//
-// function popAndAddRand(tableau) {
-//     const firstElement = tableau.shift();
-//     tableau.push(firstElement);
-//     return tableau;
-// }

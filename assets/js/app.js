@@ -1,5 +1,5 @@
 /*
- *   Copyright (c) 2020 
+ *   Copyright (c) 2020
  *   All rights reserved.
  */
 /*
@@ -15,7 +15,5 @@ require('../css/app.scss');
 require('bootstrap');
 
 import './chart';
-
 import './apex';
-
 import './fusionCharts';

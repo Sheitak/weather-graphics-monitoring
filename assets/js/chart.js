@@ -1,9 +1,9 @@
 /*
- *   Copyright (c) 2020 
+ *   Copyright (c) 2020
  *   All rights reserved.
  */
 
-//Set de couleurs pour Chart.js
+// Set de couleurs pour Chart.js
 window.chartColors = {
     red: 'rgb(255,99,132)',
     green: 'rgb(75,192,192)',
@@ -18,7 +18,6 @@ window.chartColors = {
 
 // Graphique d'affichage des différentes courbes.
 let datasets = [];
-
 
 for (let j = 0; j < labels.length; j++) {
     datasets.push({

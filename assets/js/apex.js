@@ -1,6 +1,6 @@
 import ApexCharts from 'apexcharts'
 
-// Déffinir un nouveau graphique.
+// Définir un nouveau graphique.
 let chartApexObj = null;
 createChart();
 
@@ -31,7 +31,7 @@ function createDatasets() {
 
 // Options du graphique.
 function createOptions(datasets) {
-    const options = {
+    return {
         series: datasets,
         chart: {
             height: 350,
@@ -62,23 +62,22 @@ function createOptions(datasets) {
             tickPlacement: 'between',
         }
     };
-    return options;
 }
 
-// On boucle sur le graphique "chartApexObj", pour passer la fonction "popAndAddRand" au tableau "modifedTemps".
+// On boucle sur le graphique "chartApexObj", pour passer la fonction "popAndAddRand" au tableau "updateMetrics".
 // On passe à l'objet "chartApexObj" la fonction "updateSeries" qui permet de le mettre à jours après modifications.
 function updateDataset() {
-    let modifedTemps = [];
-    chartApexObj.series.w.config.series.forEach(uneSerie => {
-        const res = popAndAddRand(uneSerie.data);
-        modifedTemps.push({data: res});
+    let updateMetrics = [];
+    chartApexObj.series.w.config.series.forEach(oneSeries => {
+        const res = popAndAddRand(oneSeries.data);
+        updateMetrics.push({data: res});
     });
-    chartApexObj.updateSeries(modifedTemps);
+    chartApexObj.updateSeries(updateMetrics);
 }
 
 // On retire le premier élément du tableau dans "firstElement", puis on l'ajoute à la fin du tableau existant.
-function popAndAddRand(tableau) {
-    const firstElement = tableau.shift();
-    tableau.push(firstElement);
-    return tableau;
+function popAndAddRand(array) {
+    const firstElement = array.shift();
+    array.push(firstElement);
+    return array;
 }

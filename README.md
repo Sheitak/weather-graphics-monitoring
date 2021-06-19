@@ -1,4 +1,4 @@
-# TEKIN Weather Monitoring - Symfony 5.0.*
+## Weather Monitoring
 
 This starter kit is here to easily start a repository.
 
@@ -34,6 +34,7 @@ It's symfony website-skeleton project with some additional tools to validate cod
 
 1. Run `php bin/console server:run` to launch your local php web server
 2. Run `yarn run dev --watch` to launch your local server for assets
+3. Get your ENV variable in OpenWeather
 
 ### Testing
 
@@ -49,15 +50,14 @@ If you develop on Windows, you should edit you git configuration to change your 
 
 `git config --global core.autocrlf true`
 
-### Deployment
-
-Add additional notes about how to deploy this on a live system
+### OpenWeather
+`https://openweathermap.org/`
 
 ### Chart.js
-test
+`https://www.chartjs.org/`
 
 ### Apex.js
-test
+`https://apexcharts.com/`
 
 ### FusionChart.js
 
@@ -66,10 +66,6 @@ Create the first chart with fusion :
 
 Find the complete list of chart types with their respective alias here :
 `https://www.fusioncharts.com/dev/chart-guide/list-of-charts`
-
-
-
-
 
 ## Built With
 
