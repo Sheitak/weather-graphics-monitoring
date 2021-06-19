@@ -1,4 +1,4 @@
-## Weather Monitoring
+## Weather Graphics Monitoring
 
 This starter kit is here to easily start a repository.
 
